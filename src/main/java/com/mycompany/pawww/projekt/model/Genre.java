@@ -29,9 +29,6 @@ public class Genre implements Serializable {
     private Long id;
     private String name;
     @ManyToOne
-    // To można pominąć wystarczy samo @ManyToOne
-    // Ale jak zrobi się tak to jest nazwa jaką się chce
-    // Domyślna była MOVIE_MOVIEID
     @JoinColumn(name = "MOVIE_ID")
     private Movie movie;
 
