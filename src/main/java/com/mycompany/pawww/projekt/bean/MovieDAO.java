@@ -13,4 +13,5 @@ import com.mycompany.pawww.projekt.model.Movie;
  */
 public interface MovieDAO {
         public Movie create(Movie movie);
+        public Movie getMovieById(Long id);
 }
