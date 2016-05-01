@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title><ui:insert name="title">Strona</ui:insert></title>
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.6/css/bootstrap.css" />
+        <h:outputScript library="webjars" name="bootstrap/3.3.6/js/bootstrap.js" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+
+    </h:head>
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+        <div class="container" role="main">
+            <div class="jumbotron">
+                <h1>MOŻNA JAKIŚ BANER ALBO WYWALIĆ</h1>
+            </div>
+            <ui:insert name="content">
+                <ui:include src="main.xhtml" />
+            </ui:insert>
+        </div>
+        <ui:insert name="footer">
+            <ui:include src="footer.xhtml" />
+        </ui:insert>
+    </h:body>
+</html>
+
