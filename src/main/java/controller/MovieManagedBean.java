@@ -7,6 +7,9 @@ package controller;
 
 import com.mycompany.pawww.projekt.bean.MovieDAO;
 import com.mycompany.pawww.projekt.model.Movie;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -23,28 +26,33 @@ public class MovieManagedBean {
     MovieDAO movieDAO;
     
     private Movie movie;
+    
+    private List<Movie> movies;
+    
+    public String showMovie(Movie movie) {
+        this.movie = movie;
+        return "movie";
+    }
+    
+    @PostConstruct
+    public void init() {
+        movies = new ArrayList<>();
+    }
+
+    public List<Movie> getMovies() {
+        return (List<Movie>) movieDAO.getAll();
+    }
+
+    public void setMovie(List<Movie> movie) {
+        this.movies = movie;
+    }
 
     public Movie getMovie() {
-        return movieDAO.getMovieById(1L);
+        return movie;
     }
 
     public void setMovie(Movie movie) {
         this.movie = movie;
-    }
-    
-//    public Movie getMovieById(Long id) {
-//        
-//    }
-    
-    /**
-     * Creates a new instance of MovieManagedBean
-     */
-    public MovieManagedBean() {
-    }
-    
-    public void a() {
-        Movie movie = new Movie();
-        movieDAO.create(movie);
     }
     
 }

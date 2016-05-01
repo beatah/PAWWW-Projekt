@@ -6,6 +6,7 @@
 package com.mycompany.pawww.projekt.bean;
 
 import com.mycompany.pawww.projekt.model.Movie;
+import java.util.Collection;
 
 /**
  *
@@ -14,4 +15,5 @@ import com.mycompany.pawww.projekt.model.Movie;
 public interface MovieDAO {
         public Movie create(Movie movie);
         public Movie getMovieById(Long id);
+        public Collection<Movie> getAll();
 }

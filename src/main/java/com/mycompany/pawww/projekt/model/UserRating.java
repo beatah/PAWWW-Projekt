@@ -6,8 +6,6 @@
 package com.mycompany.pawww.projekt.model;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,24 +13,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
- * @author Beata
+ * @author Adam Wasilczuk
  */
 @Entity
-public class Review implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Table(name = "USER_RATING")
+public class UserRating implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "REVIEW_ID")
+    @Column(name = "USER_RATING_ID")
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "MOVIE_ID")
-    private Movie movie;
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "MOVIE_ID")
+    private Movie movie;
+    private double rating;
 
     public Long getId() {
         return id;
@@ -40,14 +40,6 @@ public class Review implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
     }
 
     public User getUser() {
@@ -58,23 +50,21 @@ public class Review implements Serializable {
         this.user = user;
     }
 
-    public Date getReviewDate() {
-        return reviewDate;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setReviewDate(Date reviewDate) {
-        this.reviewDate = reviewDate;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    public String getReviewMessage() {
-        return reviewMessage;
+    public double getRating() {
+        return rating;
     }
 
-    public void setReviewMessage(String reviewMessage) {
-        this.reviewMessage = reviewMessage;
+    public void setRating(double rating) {
+        this.rating = rating;
     }
-    private Date reviewDate;
-    private String reviewMessage;
-
+    
     
 }

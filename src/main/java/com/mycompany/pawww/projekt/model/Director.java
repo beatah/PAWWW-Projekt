@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -27,6 +28,7 @@ class Director implements Serializable {
     @Column(name = "DIRECTOR_ID")
     private Long id;
     private String name;
+    @ManyToOne
     @JoinColumn(name = "MOVIE_ID")
     private Movie movie;
 
@@ -53,43 +55,4 @@ class Director implements Serializable {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.movie);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Director other = (Director) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.movie, other.movie)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Director{" + "id=" + id + ", name=" + name + ", movie=" + movie + '}';
-    }
-
 }

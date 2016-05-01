@@ -7,9 +7,11 @@ package com.mycompany.pawww.projekt.bean;
 
 import com.mycompany.pawww.projekt.model.Genre;
 import com.mycompany.pawww.projekt.model.Movie;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -41,6 +43,13 @@ public class MovieBean implements MovieDAO {
     @Override
     public Movie getMovieById(Long id) {
         return entityManager.getReference(Movie.class, id);
+    }
+
+    @Override
+    public Collection<Movie> getAll() {
+        TypedQuery<Movie> query = entityManager.createQuery(
+                "SELECT m FROM Movie m", Movie.class);
+        return query.getResultList();
     }
 
 }
