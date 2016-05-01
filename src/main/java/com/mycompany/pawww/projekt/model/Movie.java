@@ -34,6 +34,10 @@ public class Movie implements Serializable {
     private Collection<Genre> genre;
     @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     private Collection<Director> director;
+    private Integer year;
+    private Integer runtime;
+    @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
+    private Collection<Review> reviews;
 
     public Long getId() {
         return id;
@@ -66,14 +70,41 @@ public class Movie implements Serializable {
     public void setDirector(Collection<Director> director) {
         this.director = director;
     }
+    
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(Integer runtime) {
+        this.runtime = runtime;
+    }
+    
+        public Collection<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Collection<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 11 * hash + Objects.hashCode(this.id);
-        hash = 11 * hash + Objects.hashCode(this.title);
-        hash = 11 * hash + Objects.hashCode(this.genre);
-        hash = 11 * hash + Objects.hashCode(this.director);
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + Objects.hashCode(this.title);
+        hash = 43 * hash + Objects.hashCode(this.genre);
+        hash = 43 * hash + Objects.hashCode(this.director);
+        hash = 43 * hash + Objects.hashCode(this.year);
+        hash = 43 * hash + Objects.hashCode(this.runtime);
+        hash = 43 * hash + Objects.hashCode(this.reviews);
         return hash;
     }
 
@@ -101,14 +132,23 @@ public class Movie implements Serializable {
         if (!Objects.equals(this.director, other.director)) {
             return false;
         }
+        if (!Objects.equals(this.year, other.year)) {
+            return false;
+        }
+        if (!Objects.equals(this.runtime, other.runtime)) {
+            return false;
+        }
+        if (!Objects.equals(this.reviews, other.reviews)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Movie{" + "id=" + id + ", title=" + title + ", genre=" + genre + ", director=" + director + '}';
+        return "Movie{" + "id=" + id + ", title=" + title + ", genre=" + genre + ", director=" + director + ", year=" + year + ", runtime=" + runtime + ", reviews=" + reviews + '}';
     }
 
-   
-
+    
+    
 }
