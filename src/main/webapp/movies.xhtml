@@ -9,26 +9,54 @@
         Movies
     </ui:define>
     <ui:define name="content">
+<h:form id="form">
+ 
+    <p:dataGrid id="movies" var="movie" value="#{movieManagedBean.movies}"  columns="3" paginator="true" rows="9">
 
-        <h:dataTable var="movie" value="#{movieManagedBean.movies}" class="table table-striped">
-            <h:column>
-                <h:graphicImage value="http://ia.media-imdb.com/images/M/MV5BODU4MjU4NjIwNl5BMl5BanBnXkFtZTgwMDU2MjEyMDE@._V1_SY1000_CR0,0,672,1000_AL_.jpg" 
-                                height="75px" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">Title</f:facet>
-                <h:form>
-                    <h:commandLink action="#{movieManagedBean.showMovie(movie)}" value="#{movie.title}" />
-                </h:form>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Year</f:facet>
-                <h:outputText value="#{movie.year}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">Rating</f:facet>
-                <h:outputText value="#{movie.rating}" />
-            </h:column>
-        </h:dataTable>
+ 
+        <p:panel header="#{movie.title}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+                <p:graphicImage value="img/#{movie.id}.jpg" height="220px"/> 
+                <h:outputText value="Year: #{movie.year}" />
+ 
+              
+            </h:panelGrid>
+              <p:commandButton update="@form:movieDetail" oncomplete="PF('movieDialog').show()" icon="ui-icon-search" styleClass="ui-btn-inline">
+                    <f:setPropertyActionListener value="#{movie}" target="#{movieManagedBean.selectedMovie}" />
+                </p:commandButton>
+                <p:commandButton value="Add Review" styleClass="ui-priority-primary"/>
+        </p:panel>
+ 
+    </p:dataGrid>
+ 
+    <p:dialog header="Movie Info" widgetVar="movieDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="movieDetail">
+            <p:panelGrid  columns="2" rendered="#{not empty movieManagedBean.selectedMovie}" >
+                <f:facet name="header">
+                 <p:graphicImage value="img/#{movieManagedBean.selectedMovie.id}.jpg" height="220px"/> 
+                </f:facet>
+ 
+                <h:outputText value="Title:" />
+                <h:outputText value="#{movieManagedBean.selectedMovie.title}" />
+ 
+                <h:outputText value="Year:" />
+                <h:outputText value="#{movieManagedBean.selectedMovie.year}" />
+                
+                <h:outputText value="Average Rating:" />
+                <h:outputText value="#{movieManagedBean.selectedMovie.rating}/10" />
+                
+                <h:outputText value="Runtime:" />
+                <h:outputText value="#{movieManagedBean.selectedMovie.runtime}" />
+                
+                <h:outputText value="Genre:" />
+                <ui:repeat value="#{movieManagedBean.selectedMovie.genre}" var="genre">
+                    <h:outputText value="#{genre.name}" /><br/>
+                </ui:repeat>
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+ 
+</h:form>
+        
     </ui:define>
 </ui:composition>

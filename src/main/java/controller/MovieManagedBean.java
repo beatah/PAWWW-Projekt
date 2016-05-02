@@ -26,7 +26,15 @@ public class MovieManagedBean {
     MovieDAO movieDAO;
     
     private Movie movie;
-    
+    private Movie selectedMovie;
+
+    public Movie getSelectedMovie() {
+        return selectedMovie;
+    }
+
+    public void setSelectedMovie(Movie selectedMovie) {
+        this.selectedMovie = selectedMovie;
+    }
     private List<Movie> movies;
     
     public String showMovie(Movie movie) {
