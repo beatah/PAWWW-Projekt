@@ -43,7 +43,9 @@
                 <h:outputText value="#{movieManagedBean.selectedMovie.year}" />
                 
                 <h:outputText value="Average Rating:" />
-                <h:outputText value="#{movieManagedBean.selectedMovie.rating}/10" />
+                <h:outputText value="#{movieManagedBean.selectedMovie.rating}">
+                    <f:converter converterId="RatingConverter" />
+                </h:outputText>
                 
                 <h:outputText value="Runtime:" />
                 <h:outputText value="#{movieManagedBean.selectedMovie.runtime}" />
