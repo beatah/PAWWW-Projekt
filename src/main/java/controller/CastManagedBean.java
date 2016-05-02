@@ -28,7 +28,9 @@ public class CastManagedBean {
 
     private Cast cast;
     private List<Cast> stars;
-
+    private List<Movie> movies;
+    private Movie selectedMovie;
+    
     @PostConstruct
     public void init() {
         stars = new ArrayList<>();
@@ -38,7 +40,7 @@ public class CastManagedBean {
     }
     public String showStar(Cast cast) {
         this.cast = cast;
-        return "cast";
+        return "star";
     }
 
     public Cast getCast() {
@@ -56,6 +58,21 @@ public class CastManagedBean {
     public void setStars(List<Cast> stars) {
         this.stars = stars;
     }
+
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
+    public Movie getSelectedMovie() {
+        return selectedMovie;
+    }
+
+    public void setSelectedMovie(Movie selectedMovie) {
+        this.selectedMovie = selectedMovie;
+    }
+    
+    
     
     
 

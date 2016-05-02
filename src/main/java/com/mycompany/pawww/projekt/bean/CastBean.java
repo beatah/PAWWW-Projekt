@@ -8,6 +8,7 @@ package com.mycompany.pawww.projekt.bean;
 import com.mycompany.pawww.projekt.model.Cast;
 import com.mycompany.pawww.projekt.model.Movie;
 import java.util.Collection;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
