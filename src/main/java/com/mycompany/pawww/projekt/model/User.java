@@ -14,14 +14,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author Beata
  */
 @Entity
+@NamedQuery(name = "User.validateLogin", 
+        query = "SELECT u FROM User u "
+                + "WHERE u.login = :login AND u.password = :password")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

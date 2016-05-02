@@ -9,6 +9,13 @@
         #{movieManagedBean.movie.title}
     </ui:define>
     <ui:define name="content">
-
+        <f:view>
+            <h:form>
+                <h:inputText value="#{userManagedBean.user.login}" />
+                <h:inputSecret value="#{userManagedBean.user.password}" />
+                <h:commandButton value="#{userManagedBean.login()}" />
+            </h:form>
+        </f:view>
+        <h:outputLabel value="#{userManagedBean.user.id}"/>
     </ui:define>
 </ui:composition>

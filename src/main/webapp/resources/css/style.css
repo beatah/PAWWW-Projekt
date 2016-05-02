@@ -25,7 +25,7 @@
 }
 .block div {
     overflow: hidden;
-    padding: 20 0 0 0px;
+    padding: 20px 0 0 0;
 }
 h2 {
     font-size: 48px;
