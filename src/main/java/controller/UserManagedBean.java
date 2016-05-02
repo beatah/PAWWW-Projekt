@@ -12,6 +12,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 /**
  *
@@ -39,10 +40,14 @@ public class UserManagedBean implements Serializable {
         this.user = user;
     }
     
-    public void login() {
+    public String login() {
         user = userDAO.vaidateUsernamaPassword(user.getLogin(), user.getPassword());
         if(user.getLogin() == null) {
+            FacesContext.getCurrentInstance().addMessage(
+                    "loginForm:login", new FacesMessage("Wrong login or password"));
+            return "login";
         }
+        return "index";
     }
     
     public String logout() {
