@@ -24,7 +24,7 @@
               <p:commandButton update="@form:movieDetail" oncomplete="PF('movieDialog').show()" icon="ui-icon-search" styleClass="ui-btn-inline">
                     <f:setPropertyActionListener value="#{movie}" target="#{movieManagedBean.selectedMovie}" />
                 </p:commandButton>
-                <p:commandButton value="Add Review" styleClass="ui-priority-primary"/>
+                <p:commandButton value="Reviews" styleClass="ui-priority-primary" action="#{movieManagedBean.showMovie(movie)}"/>
         </p:panel>
  
     </p:dataGrid>
