@@ -59,6 +59,15 @@ public class Movie implements Serializable {
     private double rating;
     @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     private Collection<UserRating> userRating;
+    @ManyToMany
+    @JoinTable(
+            name = "CAST_MOVIE",
+            joinColumns = {
+                @JoinColumn(name = "CAST_ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "MOVIE_ID")}
+    )
+    private Collection<Cast> cast;
 
     public Long getId() {
         return id;
