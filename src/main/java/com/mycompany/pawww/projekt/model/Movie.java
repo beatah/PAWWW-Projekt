@@ -14,6 +14,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -29,9 +32,25 @@ public class Movie implements Serializable {
     @Column(name = "MOVIE_ID")
     private Long id;
     private String title;
-    @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
+   
+    @ManyToMany
+    @JoinTable(
+            name = "GENRE_MOVIE",
+            joinColumns = {
+                @JoinColumn(name = "GENRE_ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "MOVIE_ID")}
+    )
     private Collection<Genre> genre;
-    @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
+
+    @ManyToMany
+    @JoinTable(
+            name = "DIRECTOR_MOVIE",
+            joinColumns = {
+                @JoinColumn(name = "DIRECTOR_ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "MOVIE_ID")}
+    )
     private Collection<Director> director;
     private Integer year;
     private Integer runtime;

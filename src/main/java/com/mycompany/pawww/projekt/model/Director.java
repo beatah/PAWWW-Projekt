@@ -6,13 +6,16 @@
 package com.mycompany.pawww.projekt.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -28,9 +31,8 @@ class Director implements Serializable {
     @Column(name = "DIRECTOR_ID")
     private Long id;
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "MOVIE_ID")
-    private Movie movie;
+    @ManyToMany(mappedBy="director", cascade=CascadeType.ALL)
+    private Collection<Movie> movie;
 
     public Long getId() {
         return id;
@@ -48,11 +50,13 @@ class Director implements Serializable {
         this.name = name;
     }
 
-    public Movie getMovie() {
+    public Collection<Movie> getMovie() {
         return movie;
     }
 
-    public void setMovie(Movie movie) {
+    public void setMovie(Collection<Movie> movie) {
         this.movie = movie;
     }
+
+
 }

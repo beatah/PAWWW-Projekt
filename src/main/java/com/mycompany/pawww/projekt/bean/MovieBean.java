@@ -26,7 +26,7 @@ public class MovieBean implements MovieDAO {
     @Override
     public Movie create(Movie movie) {
         movie = entityManager.find(Movie.class, 1L);
-
+/*
         Genre genre1 = new Genre();
         Genre genre2 = new Genre();
         genre1.setName("Genre1");
@@ -36,7 +36,7 @@ public class MovieBean implements MovieDAO {
         movie.getGenre().add(genre1);
         movie.getGenre().add(genre2);
         entityManager.merge(movie);
-
+*/
         return movie;
     }
 
