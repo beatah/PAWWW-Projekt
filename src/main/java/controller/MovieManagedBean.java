@@ -27,6 +27,7 @@ public class MovieManagedBean {
     
     private Movie movie;
     private Movie selectedMovie;
+    private List<Movie> movies;
 
     public Movie getSelectedMovie() {
         return selectedMovie;
@@ -35,7 +36,6 @@ public class MovieManagedBean {
     public void setSelectedMovie(Movie selectedMovie) {
         this.selectedMovie = selectedMovie;
     }
-    private List<Movie> movies;
     
     public String showMovie(Movie movie) {
         this.movie = movie;
@@ -50,7 +50,7 @@ public class MovieManagedBean {
     public List<Movie> getMovies() {
         return (List<Movie>) movieDAO.getAll();
     }
-
+    
     public void setMovie(List<Movie> movie) {
         this.movies = movie;
     }
