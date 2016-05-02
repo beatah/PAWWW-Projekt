@@ -37,9 +37,9 @@ public class Movie implements Serializable {
     @JoinTable(
             name = "GENRE_MOVIE",
             joinColumns = {
-                @JoinColumn(name = "GENRE_ID")},
+                @JoinColumn(name = "MOVIE_ID")},
             inverseJoinColumns = {
-                @JoinColumn(name = "MOVIE_ID")}
+                @JoinColumn(name = "GENRE_ID")}
     )
     private Collection<Genre> genre;
 
@@ -47,9 +47,9 @@ public class Movie implements Serializable {
     @JoinTable(
             name = "DIRECTOR_MOVIE",
             joinColumns = {
-                @JoinColumn(name = "DIRECTOR_ID")},
+                @JoinColumn(name = "MOVIE_ID")},
             inverseJoinColumns = {
-                @JoinColumn(name = "MOVIE_ID")}
+                @JoinColumn(name = "DIRECTOR_ID")}
     )
     private Collection<Director> director;
     private Integer year;
@@ -59,6 +59,15 @@ public class Movie implements Serializable {
     private double rating;
     @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     private Collection<UserRating> userRating;
+    @ManyToMany
+    @JoinTable(
+            name = "CAST_MOVIE",
+            joinColumns = {
+                @JoinColumn(name = "MOVIE_ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "CAST_ID")}
+    )
+    private Collection<Cast> cast;
 
     public Long getId() {
         return id;

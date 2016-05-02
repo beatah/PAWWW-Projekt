@@ -9,6 +9,34 @@
         #{movieManagedBean.movie.title}
     </ui:define>
     <ui:define name="content">
+         <h:dataTable var="movie" value="#{movieManagedBean.movie}" class="table table-striped">
+            <h:column>
+                <h:graphicImage value="img/#{movie.id}.jpg" height="75px" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Title</f:facet>
+                 <h:outputText value="#{movie.title}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Year</f:facet>
+                <h:outputText value="#{movie.year}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Rating</f:facet>
+                <h:outputText value="#{movie.rating}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Runtime</f:facet>
+                <h:outputText value="#{movie.runtime}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Genre</f:facet>
+                <ui:repeat value="#{movie.genre}" var="genre">
+                    <h:outputText value="#{genre.name}" /><br/>
+                </ui:repeat>
+            </h:column>
+        </h:dataTable>
+         <h:outputLabel value="tu damy recenzje"/>
         <f:view>
             <h:form>
                 <h:inputText value="#{userManagedBean.user.login}" />
