@@ -47,6 +47,6 @@ public class UserManagedBean implements Serializable {
     
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "index";
+        return "index?faces-redirect=true";
     }
 }
