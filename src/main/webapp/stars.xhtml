@@ -9,7 +9,6 @@
         Stars
     </ui:define>
     <ui:define name="content">
-        <h:form id="form">
             <h:dataTable var="cast" value="#{castManagedBean.stars}" class="table table-striped">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
@@ -23,7 +22,5 @@
                     </h:form>
                 </h:column>
             </h:dataTable>
-        </h:form>
-
     </ui:define>
 </ui:composition>
