@@ -7,6 +7,7 @@ package controller;
 
 import com.mycompany.pawww.projekt.bean.MovieDAO;
 import com.mycompany.pawww.projekt.model.Movie;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -20,11 +21,11 @@ import javax.enterprise.context.RequestScoped;
  */
 @Named(value = "movieManagedBean")
 @RequestScoped
-public class MovieManagedBean {
+public class MovieManagedBean implements Serializable {
 
     @EJB
     MovieDAO movieDAO;
-    
+
     private Movie movie;
     private Movie selectedMovie;
     private List<Movie> movies;
@@ -36,12 +37,12 @@ public class MovieManagedBean {
     public void setSelectedMovie(Movie selectedMovie) {
         this.selectedMovie = selectedMovie;
     }
-    
+
     public String showMovie(Movie movie) {
         this.movie = movie;
         return "movie";
     }
-    
+
     @PostConstruct
     public void init() {
         movies = new ArrayList<>();
@@ -50,7 +51,7 @@ public class MovieManagedBean {
     public List<Movie> getMovies() {
         return (List<Movie>) movieDAO.getAll();
     }
-    
+
     public void setMovie(List<Movie> movie) {
         this.movies = movie;
     }
@@ -62,5 +63,5 @@ public class MovieManagedBean {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
-    
+
 }
