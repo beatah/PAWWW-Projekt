@@ -39,6 +39,13 @@ public class UserManagedBean implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    
+    public String add()
+    {
+        userDAO.create(user);
+        return "index";
+    }
     
     public String login() {
         user = userDAO.vaidateUsernamaPassword(user.getLogin(), user.getPassword());

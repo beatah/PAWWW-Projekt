@@ -6,7 +6,7 @@
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="title">
-        Login
+        Register
     </ui:define>
     <ui:define name="content">
         <div class="container">
@@ -14,14 +14,11 @@
                 <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
                 <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
                  <h:form id="loginForm">
-                    <div class="alert alert-danger" role="alert">
-                    <h:message for="login" />
-                    </div>
                     <h:inputText id="login" value="#{userManagedBean.user.login}" 
                                  class="form-control" p:placeholder="Username"/><br />
                     <h:inputSecret value="#{userManagedBean.user.password}" 
                                    class="form-control" p:placeholder="Password" /><br />
-                    <h:commandButton value="Sign in" action="#{userManagedBean.login()}"
+                    <h:commandButton value="Sign up" action="#{userManagedBean.add()}"
                                  class="btn btn-default"/>
                 </h:form><!-- /form -->
                 </div><!-- /card-container -->

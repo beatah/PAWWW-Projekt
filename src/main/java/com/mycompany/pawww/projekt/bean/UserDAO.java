@@ -13,4 +13,5 @@ import com.mycompany.pawww.projekt.model.User;
  */
 public interface UserDAO {
     public User vaidateUsernamaPassword(String login, String password);
+    public void create(User user);
 }

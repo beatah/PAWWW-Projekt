@@ -35,4 +35,10 @@ public class UserBean implements UserDAO {
             return new User();
         }
     }
+    
+    @Override
+    public void create(User user) {
+        entityManager.persist(user);
+    }
+    
 }
