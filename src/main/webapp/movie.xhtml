@@ -36,6 +36,30 @@
                 </ui:repeat>
             </h:column>
         </h:dataTable>
+        <p:dataGrid var="review" value="#{movieManagedBean.reviews}" columns="1" layout="grid"
+                    rows="3" paginator="true" id="reviews"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="6,12,16">
+
+            <f:facet name="header">
+                Reviews
+            </f:facet>
+
+            <p:panel header="#{review.id}" style="text-align:center">
+                <h:panelGrid columns="2" style="width:100%" columnClasses="details,review" class="panel">
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Date:" />
+                            <h:outputText value="#{review.reviewDate}" style="font-weight: bold"/>
+                            <h:outputText value="User:" />
+                            <h:outputText value="#{review.user.login}" style="font-weight: bold"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                    <h:outputText value="#{review.reviewMessage}" style="font-weight: bold"/>
+                </h:panelGrid>
+            </p:panel>
+        </p:dataGrid>
+
         <f:view >
             <h:form rendered="#{not empty userManagedBean.user.id}">
                 <div class="container">

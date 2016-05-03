@@ -7,6 +7,7 @@ package controller;
 
 import com.mycompany.pawww.projekt.bean.MovieDAO;
 import com.mycompany.pawww.projekt.model.Movie;
+import com.mycompany.pawww.projekt.model.Review;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class MovieManagedBean implements Serializable {
     private Movie movie;
     private Movie selectedMovie;
     private List<Movie> movies;
+    private List<Review> reviews;
 
     public Movie getSelectedMovie() {
         return selectedMovie;
@@ -46,6 +48,7 @@ public class MovieManagedBean implements Serializable {
     @PostConstruct
     public void init() {
         movies = new ArrayList<>();
+         reviews=new ArrayList<>();
     }
 
     public List<Movie> getMovies() {
@@ -62,6 +65,14 @@ public class MovieManagedBean implements Serializable {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    public List<Review> getReviews() {
+        return (List<Review>) movie.getReviews();
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
 }
