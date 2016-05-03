@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:composition>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -22,27 +23,38 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <h:outputText rendered="#{empty userManagedBean.user.id}" value="Zaloguj" />
+                                <span class="glyphicon glyphicon-user" style="margin-right: 10px;" aria-hidden="true"></span>
+                                <h:outputText rendered="#{empty userManagedBean.user.id}" value="Sign in" />
                                 <h:outputText rendered="#{not empty userManagedBean.user.id}" value="#{userManagedBean.user.login}" />
                                 <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" id="login">
                                 <!--no user logged in-->
                                 <h:panelGroup rendered="#{empty userManagedBean.user.id}">
                                     <h:form>
-                                        <h:outputLabel value="Sign in" /><br />
-                                        <h:outputText value="Login" />
-                                        <h:inputText value="#{userManagedBean.user.login}" />
-                                        <h:outputText value="Hasło" />
-                                        <h:inputSecret value="#{userManagedBean.user.password}" />
-                                        <h:commandButton value="Zaloguj" action="#{userManagedBean.login()}"
-                                                         class="btn btn-default navbar-btn"/>
+                                        <div class="input-group input-group-sm mrg">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-envelope"></span>
+                                            </span>
+                                            <h:inputText value="#{userManagedBean.user.login}" 
+                                                         class="form-control" p:placeholder="username"/>
+                                        </div>
+                                        <div class="input-group input-group-sm mrg">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-lock"></span>
+                                            </span>
+                                            <h:inputSecret value="#{userManagedBean.user.password}" 
+                                                           class="form-control" p:placeholder="password"/>
+                                        </div>
+                                        
+                                        <h:commandButton value="Sign in" action="#{userManagedBean.login()}" 
+                                                         class="btn btn-default navbar-btn mrg"/>
                                     </h:form>
                                 </h:panelGroup>
                                 <!--user logged in-->
                                 <h:panelGroup rendered="#{not empty userManagedBean.user.id}">
                                     <h:form>
-                                        <h:commandButton value="Wyloguj" action="#{userManagedBean.logout()}"
-                                                         class="btn btn-default navbar-btn"/>
+                                        <h:commandButton value="Log out" action="#{userManagedBean.logout()}"
+                                                         class="btn btn-default navbar-btn mrg"/>
                                     </h:form>
                                 </h:panelGroup>
                             </ul>
