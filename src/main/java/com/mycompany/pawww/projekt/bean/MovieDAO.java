@@ -18,4 +18,5 @@ public interface MovieDAO {
         public Movie getMovieById(Long id);
         public Collection<Movie> getAll();
         public void addReview(Review review);
+        public Collection getMoviesByTitle(String title);
 }

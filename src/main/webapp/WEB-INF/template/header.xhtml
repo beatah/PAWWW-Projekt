@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+      xmlns:p="http://primefaces.org/ui"> <!--xmlns:p="http://xmlns.jcp.org/jsf/passthrough"-->
 
     <ui:composition>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -20,6 +21,23 @@
                         <li><h:link value="Movie" outcome="movies"/></li>
                         <li><h:link value="Stars" outcome="stars"/></li>
                         <li><h:link value="Sign Up" outcome="registration"/></li>
+                        <li>
+                            <!--<div>-->
+                                <h:form>
+                                    <p:inputText id="firstname" value="#{search.search}">
+                                        <p:ajax event="keyup" listener="#{search.getMovies()}" update="out1" />
+                                    </p:inputText>
+                                </h:form>
+                            <h:panelGroup id="out1" style="background-color: #F7F7F7">
+
+                                    <ui:repeat rendered="#{not empty search.searchResult}" value="#{search.titles}" var="movie">
+                                        <p:graphicImage value="img/#{movie.id}.jpg" height="45px"/>
+                                        <p:outputLabel value="#{movie.title}" /> <br />
+                                    </ui:repeat>
+
+                                </h:panelGroup>
+                            <!--</div>-->
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -46,7 +64,7 @@
                                             <h:inputSecret value="#{userManagedBean.user.password}" 
                                                            class="form-control" p:placeholder="password"/>
                                         </div>
-                                        
+
                                         <h:commandButton value="Sign in" action="#{userManagedBean.login()}" 
                                                          class="btn btn-default navbar-btn mrg"/>
                                     </h:form>

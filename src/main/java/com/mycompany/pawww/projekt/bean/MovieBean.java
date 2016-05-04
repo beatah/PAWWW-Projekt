@@ -12,6 +12,7 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -57,6 +58,15 @@ public class MovieBean implements MovieDAO {
     public void addReview(Review review) {
         entityManager.getEntityManagerFactory().getCache().evictAll();
         entityManager.persist(review);
+    }
+
+    @Override
+    public Collection getMoviesByTitle(String title) {
+        System.out.println(title);
+        Query query = entityManager.createQuery("SELECT m.id, m.title FROM Movie m "
+                + "WHERE m.title LIKE :title");
+        query.setParameter("title", "%" + title + "%");
+        return query.getResultList();
     }
 
 }
