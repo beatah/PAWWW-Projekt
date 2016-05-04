@@ -21,7 +21,7 @@
                     <ul class="nav navbar-nav">
                         <li><h:link value="Movie" outcome="movies"/></li>
                         <li><h:link value="Stars" outcome="stars"/></li>
-                        <li><h:link value="Sign Up" outcome="registration" rendered="#{empty userManagedBean.user.id}"/></li>
+                        
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
@@ -75,6 +75,8 @@
                                         <h:commandButton value="Sign in" action="#{userManagedBean.login()}" 
                                                          class="btn btn-default navbar-btn mrg"/>
                                     </h:form>
+                                    <li class="dropdown-headre" style="color: #F7F7F7">Don't have account?</li>
+                                    <h:button value="Sign Up" outcome="registration" rendered="#{empty userManagedBean.user.id}"/>
                                 </h:panelGroup>
                                 <!--user logged in-->
                                 <h:panelGroup rendered="#{not empty userManagedBean.user.id}">
