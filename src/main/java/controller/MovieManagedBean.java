@@ -34,11 +34,9 @@ public class MovieManagedBean implements Serializable {
     private List<Review> reviews;
     private List<Movie> top5;
 
-    public List<Movie> getTop5() {       
-        List<Movie> top=(List<Movie>) movieDAO.getAll();
-        Collections.sort(top, Movie.COMPARE_BY_RATING);
-        Collections.reverse(top);
-        return top.subList(0, 5);
+    public List<Movie> getTop5() {
+        List<Movie> top = (List<Movie>) movieDAO.getTop();
+        return top;
     }
 
     public void setTop5(List<Movie> top5) {
@@ -61,7 +59,7 @@ public class MovieManagedBean implements Serializable {
     @PostConstruct
     public void init() {
         movies = new ArrayList<>();
-         reviews=new ArrayList<>();
+        reviews = new ArrayList<>();
     }
 
     public List<Movie> getMovies() {

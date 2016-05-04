@@ -69,4 +69,11 @@ public class MovieBean implements MovieDAO {
         return query.getResultList();
     }
 
+    @Override
+    public Collection<Movie> getTop() {
+        Query query = entityManager.createQuery("SELECT m FROM Movie as m "
+                + "ORDER BY m.rating DESC").setMaxResults(5);
+        return query.getResultList();
+    }
+
 }

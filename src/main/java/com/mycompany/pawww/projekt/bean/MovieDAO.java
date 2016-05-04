@@ -19,4 +19,5 @@ public interface MovieDAO {
         public Collection<Movie> getAll();
         public void addReview(Review review);
         public Collection getMoviesByTitle(String title);
+        public Collection<Movie> getTop();
 }

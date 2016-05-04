@@ -69,12 +69,7 @@ public class Movie implements Serializable {
             inverseJoinColumns = {
                 @JoinColumn(name = "CAST_ID")}
     )
-    public static Comparator<Movie> COMPARE_BY_RATING = new Comparator<Movie>() {
-        public int compare(Movie one, Movie other) {
-            return Double.valueOf(one.rating).compareTo(Double.valueOf(other.rating));
-        }
-    };
-    
+
     private Collection<Cast> cast;
 
     public Long getId() {
