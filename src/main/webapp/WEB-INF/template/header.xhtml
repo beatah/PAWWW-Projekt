@@ -21,7 +21,7 @@
                     <ul class="nav navbar-nav">
                         <li><h:link value="Movie" outcome="movies"/></li>
                         <li><h:link value="Stars" outcome="stars"/></li>
-                        <li><h:link value="Sign Up" outcome="registration"/></li>
+                        <li><h:link value="Sign Up" outcome="registration" rendered="#{empty userManagedBean.user.id}"/></li>
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>

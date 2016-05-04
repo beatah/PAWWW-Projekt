@@ -10,6 +10,7 @@ import com.mycompany.pawww.projekt.model.Movie;
 import com.mycompany.pawww.projekt.model.Review;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -31,6 +32,18 @@ public class MovieManagedBean implements Serializable {
     private Movie selectedMovie;
     private List<Movie> movies;
     private List<Review> reviews;
+    private List<Movie> top5;
+
+    public List<Movie> getTop5() {       
+        List<Movie> top=(List<Movie>) movieDAO.getAll();
+        Collections.sort(top, Movie.COMPARE_BY_RATING);
+        Collections.reverse(top);
+        return top.subList(0, 5);
+    }
+
+    public void setTop5(List<Movie> top5) {
+        this.top5 = top5;
+    }
 
     public Movie getSelectedMovie() {
         return selectedMovie;

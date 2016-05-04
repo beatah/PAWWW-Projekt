@@ -41,6 +41,18 @@
                     <h:outputText value="#{genre.name}" /><br/>
                 </ui:repeat>
             </h:column>
+            <h:column>
+                <f:facet name="header">Director</f:facet>
+                <ui:repeat value="#{movie.director}" var="director">
+                    <h:outputText value="#{director.name}" /><br/>
+                </ui:repeat>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Cast</f:facet>
+                <ui:repeat value="#{movie.cast}" var="cast">
+                    <h:outputText value="#{cast.name}" /><br/>
+                </ui:repeat>
+            </h:column>
         </h:dataTable>
         <h:dataTable id="review" var="review" value="#{movieReview.movie.reviews}" class="table table-striped">
             <h:column>

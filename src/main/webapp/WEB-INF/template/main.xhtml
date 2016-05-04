@@ -1,5 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition>
         <div class="bg-content">
             <div class="container">
@@ -52,9 +55,19 @@
         </div>
 
         <div class="container">
-            <h2>TOP 10</h2>
-            <p>tu z bazy dam select cos tam że wyskoczą te z najlepszym ratingiem</p>
-            <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: red"></span>
+            <h2>TOP 5</h2>
+            <h:dataTable var="movie" value="#{movieManagedBean.top5}" class="table table-striped">
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputText value="#{movie.title}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rating</f:facet>
+                    <h:form>
+                       <h:outputText value="#{movie.rating}" />    
+                    </h:form>
+                </h:column>
+            </h:dataTable>
         </div>
     </ui:composition>
 </html>

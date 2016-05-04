@@ -23,7 +23,7 @@ import javax.persistence.ManyToOne;
  * @author Adam Wasilczuk
  */
 @Entity
-class Director implements Serializable {
+public class Director implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
