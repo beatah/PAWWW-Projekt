@@ -3,26 +3,40 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
         Register
     </ui:define>
     <ui:define name="content">
         <div class="container">
-            <div class="card card-container">
-                <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-                <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-                 <h:form id="loginForm">
-                    <h:inputText id="login" value="#{userManagedBean.user.login}" 
-                                 class="form-control" p:placeholder="Username"/><br />
-                    <h:inputSecret value="#{userManagedBean.user.password}" 
-                                   class="form-control" p:placeholder="Password" /><br />
+            <div class="card card-container">      
+                <h:form id="loginForm">
+                    <p:message id="loginMsg" for="login" />
+                    <p:message for="password1"/><br/>
+                    <p:message id="passMsg" for="password2"/><br/>
+                    <h:inputText id="login" value="#{userManagedBean.login}"
+                                 binding="#{userManagedBean.loginInput}"
+                                 class="form-control" a:placeholder="Username" required="true" requiredMessage="Username is required.">
+                        <p:ajax event="blur" 
+                                listener="#{userManagedBean.checkDuplicate}" 
+                                update="loginMsg" />
+                    </h:inputText><br />
+                    <h:inputSecret id="password1" value="#{userManagedBean.password}" 
+                                   class="form-control" a:placeholder="Password" required="true" requiredMessage="Password is required."/><br/>
+                    <h:inputSecret id="password2" value="#{userManagedBean.password2}" 
+                                   binding="#{userManagedBean.passwordInput}"
+                                   class="form-control" a:placeholder="Confirm password" required="true" requiredMessage="Confirm password.">
+                        <p:ajax event="keyup" 
+                                listener="#{userManagedBean.checkPassword}" 
+                                update="passMsg" />
+                    </h:inputSecret><br/>
                     <h:commandButton value="Sign up" action="#{userManagedBean.add()}"
-                                 class="btn btn-default"/>
-                </h:form><!-- /form -->
-                </div><!-- /card-container -->
-                </div><!-- /container -->
+                                     class="btn btn-default"/>
+                </h:form>
+                </div>
+                </div>
 
     </ui:define>
 </ui:composition>

@@ -6,6 +6,7 @@
 package com.mycompany.pawww.projekt.bean;
 
 import com.mycompany.pawww.projekt.model.User;
+import java.util.Collection;
 
 /**
  *
@@ -14,4 +15,5 @@ import com.mycompany.pawww.projekt.model.User;
 public interface UserDAO {
     public User vaidateUsernamaPassword(String login, String password);
     public void create(User user);
+    public Collection<User> getAll();
 }

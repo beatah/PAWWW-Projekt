@@ -10,9 +10,12 @@ import com.mycompany.pawww.projekt.model.User;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 /**
  *
@@ -26,7 +29,52 @@ public class UserManagedBean implements Serializable {
     UserDAO userDAO;
     
     private User user;
+    private UIComponent loginInput;
+    private UIComponent passwordInput;
+    private String login;
+    private String password;
+    private String password2;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     
+    public UIComponent getPasswordInput() {
+        return passwordInput;
+    }
+
+    public void setPasswordInput(UIComponent passwordInput) {
+        this.passwordInput = passwordInput;
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+
+    public UIComponent getLoginInput() {
+        return loginInput;
+    }
+
+    public void setLoginInput(UIComponent loginInput) {
+        this.loginInput = loginInput;
+    }
     @PostConstruct
     public void init() {
         user = new User();
@@ -41,10 +89,16 @@ public class UserManagedBean implements Serializable {
     }
 
     
-    public String add()
-    {
-        userDAO.create(user);
-        return "index";
+    public String add() {
+        if (checkDuplicate()&&checkPassword()) {
+            User u=new User();
+            u.setLogin(login);
+            u.setPassword(password);
+           
+            userDAO.create(u);
+            return "index";
+        }
+        return "registration";
     }
     
     public String login() {
@@ -60,5 +114,29 @@ public class UserManagedBean implements Serializable {
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index?faces-redirect=true";
+    }
+
+    public boolean checkDuplicate() {
+        List<User> users = (List<User>) userDAO.getAll();
+        for (User u : users) {
+            if (login.equals(u.getLogin())) {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(loginInput.getClientId(), new FacesMessage(FacesMessage.SEVERITY_ERROR, "The username already exists.", null));
+                return false;
+
+            }
+        }
+        return true;
+    }
+
+    public boolean checkPassword() {
+        System.out.print(user.getPassword());
+         System.out.print(password2);
+        if (!password.equals(password2)) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(passwordInput.getClientId(), new FacesMessage(FacesMessage.SEVERITY_ERROR, "Passwords don't match.", null));
+            return false;
+        }
+        return true;
     }
 }

@@ -6,6 +6,7 @@
 package com.mycompany.pawww.projekt.bean;
 
 import com.mycompany.pawww.projekt.model.User;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -35,7 +36,12 @@ public class UserBean implements UserDAO {
             return new User();
         }
     }
-    
+    @Override
+    public Collection<User> getAll() {
+        TypedQuery<User> query = entityManager.createQuery(
+                "SELECT u FROM User u", User.class);
+        return query.getResultList();
+    }
     @Override
     public void create(User user) {
         entityManager.persist(user);
