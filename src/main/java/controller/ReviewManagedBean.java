@@ -40,12 +40,14 @@ public class ReviewManagedBean implements Serializable {
         movie = movieDAO.getMovieById(currentId);
     }
 
-    public void addReview(User user) {
+    public String addReview(User user) {
         review.setMovie(movie);
         review.setReviewDate(new Date());
         review.setUser(user);
 
         movieDAO.addReview(review);
+        
+        return "movie?faces-redirect=true";
     }
 
     public Long getCurrentId() {

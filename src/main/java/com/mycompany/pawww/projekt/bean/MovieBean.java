@@ -55,6 +55,7 @@ public class MovieBean implements MovieDAO {
 
     @Override
     public void addReview(Review review) {
+        entityManager.getEntityManagerFactory().getCache().evictAll();
         entityManager.persist(review);
     }
 
