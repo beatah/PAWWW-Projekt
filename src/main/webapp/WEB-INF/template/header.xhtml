@@ -2,7 +2,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
 
-      xmlns:p="http://primefaces.org/ui"> <!--xmlns:p="http://xmlns.jcp.org/jsf/passthrough"-->
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> <!--xmlns:p="http://xmlns.jcp.org/jsf/passthrough"-->
 
     <ui:composition>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -26,6 +27,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
                             <ul class="dropdown-menu" id="login">
                                 <h:form>
+
                                     <p:inputText id="firstname" value="#{search.search}"
                                                  class="form-control" style="width:195px;" p:placeholder="Search">
                                         <p:ajax event="keyup" listener="#{search.getMovies()}" update="out1" />
@@ -34,7 +36,10 @@
                                 <h:panelGroup id="out1">
                                     <ui:repeat rendered="#{not empty search.searchResult}" value="#{search.titles}" var="movie">
                                         <p:graphicImage value="img/#{movie.id}.jpg" height="45px"/>
-                                        <p:outputLabel value="#{movie.title}" style="color:#fff; font-size:12px;"/> <br />
+                                        <p:link value="#{movie.title}" outcome="movie" 
+                                                style="color:#fff; font-size:12px;">
+                                            <f:param name="movieId" value="#{movie.id}" />
+                                        </p:link><br />
                                     </ui:repeat>
 
                                 </h:panelGroup>
