@@ -75,8 +75,9 @@
                                         <h:commandButton value="Sign in" action="#{userManagedBean.login()}" 
                                                          class="btn btn-default navbar-btn mrg"/>
                                     </h:form>
-                                    <li class="dropdown-headre" style="color: #F7F7F7">Don't have account?</li>
-                                    <h:button value="Sign Up" outcome="registration" rendered="#{empty userManagedBean.user.id}"/>
+                                    <li class="dropdown-headre mrg" style="color: #F7F7F7">Don't have account?</li>
+                                    <h:button value="Sign Up" outcome="registration" rendered="#{empty userManagedBean.user.id}"
+                                              class="btn btn-default navbar-btn mrg" style="margin-top:-5px;"/>
                                 </h:panelGroup>
                                 <!--user logged in-->
                                 <h:panelGroup rendered="#{not empty userManagedBean.user.id}">
