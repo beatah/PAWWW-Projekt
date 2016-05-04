@@ -7,6 +7,7 @@ package com.mycompany.pawww.projekt.bean;
 
 import com.mycompany.pawww.projekt.model.Genre;
 import com.mycompany.pawww.projekt.model.Movie;
+import com.mycompany.pawww.projekt.model.Review;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -50,6 +51,11 @@ public class MovieBean implements MovieDAO {
         TypedQuery<Movie> query = entityManager.createQuery(
                 "SELECT m FROM Movie m", Movie.class);
         return query.getResultList();
+    }
+
+    @Override
+    public void addReview(Review review) {
+        entityManager.persist(review);
     }
 
 }

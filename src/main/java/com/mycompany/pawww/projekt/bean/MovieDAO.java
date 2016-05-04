@@ -6,6 +6,7 @@
 package com.mycompany.pawww.projekt.bean;
 
 import com.mycompany.pawww.projekt.model.Movie;
+import com.mycompany.pawww.projekt.model.Review;
 import java.util.Collection;
 
 /**
@@ -16,4 +17,5 @@ public interface MovieDAO {
         public Movie create(Movie movie);
         public Movie getMovieById(Long id);
         public Collection<Movie> getAll();
+        public void addReview(Review review);
 }
