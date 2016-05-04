@@ -7,6 +7,7 @@ package com.mycompany.pawww.projekt.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Comparator;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ import javax.persistence.OneToMany;
  * @author Adam Wasilczuk
  */
 @Entity
+
 public class Movie implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,6 +69,12 @@ public class Movie implements Serializable {
             inverseJoinColumns = {
                 @JoinColumn(name = "CAST_ID")}
     )
+    public static Comparator<Movie> COMPARE_BY_RATING = new Comparator<Movie>() {
+        public int compare(Movie one, Movie other) {
+            return Double.valueOf(one.rating).compareTo(Double.valueOf(other.rating));
+        }
+    };
+    
     private Collection<Cast> cast;
 
     public Long getId() {
@@ -141,4 +149,13 @@ public class Movie implements Serializable {
         this.userRating = userRating;
     }
 
+    public Collection<Cast> getCast() {
+        return cast;
+    }
+
+    public void setCast(Collection<Cast> cast) {
+        this.cast = cast;
+    }
+
+    
 }
