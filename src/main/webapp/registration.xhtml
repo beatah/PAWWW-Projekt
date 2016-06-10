@@ -14,6 +14,7 @@
             <div class="card card-container">      
                 <h:form id="loginForm">
                     <p:message id="loginMsg" for="login" />
+                    <p:message id="emailMsg" for="emailID" />
                     <p:message for="password1"/><br/>
                     <p:message id="passMsg" for="password2"/><br/>
                     <h:inputText id="login" value="#{userManagedBean.login}"
@@ -23,6 +24,10 @@
                                 listener="#{userManagedBean.checkDuplicate}" 
                                 update="loginMsg" />
                     </h:inputText><br />
+                    <h:inputText id="emailID" value="#{userManagedBean.user.email}"
+                                 rendered="true" a:placeholder="Email">
+                        <f:validator validatorId="emailValidator" />
+                    </h:inputText>
                     <h:inputSecret id="password1" value="#{userManagedBean.password}" 
                                    class="form-control" a:placeholder="Password" required="true" requiredMessage="Password is required."/><br/>
                     <h:inputSecret id="password2" value="#{userManagedBean.password2}" 
