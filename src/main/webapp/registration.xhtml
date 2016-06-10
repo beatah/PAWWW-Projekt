@@ -11,7 +11,8 @@
     </ui:define>
     <ui:define name="content">
         <div class="container">
-            <div class="card card-container">      
+            <div class="card card-container">
+                <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
                 <h:form id="loginForm">
                     <p:message id="loginMsg" for="login" />
                     <p:message id="emailMsg" for="emailID" />
@@ -25,9 +26,10 @@
                                 update="loginMsg" />
                     </h:inputText><br />
                     <h:inputText id="emailID" value="#{userManagedBean.user.email}"
-                                 rendered="true" a:placeholder="Email">
+                                 rendered="true" class="form-control"
+                                 a:placeholder="Email">
                         <f:validator validatorId="emailValidator" />
-                    </h:inputText>
+                    </h:inputText><br />
                     <h:inputSecret id="password1" value="#{userManagedBean.password}" 
                                    class="form-control" a:placeholder="Password" required="true" requiredMessage="Password is required."/><br/>
                     <h:inputSecret id="password2" value="#{userManagedBean.password2}" 

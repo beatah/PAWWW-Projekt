@@ -7,6 +7,7 @@ package com.mycompany.pawww.projekt.controller;
 
 import com.mycompany.pawww.projekt.bean.UserDAO;
 import com.mycompany.pawww.projekt.model.User;
+import com.mycompany.pawww.projekt.model.UserGroup;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -94,7 +95,10 @@ public class UserManagedBean implements Serializable {
             User u=new User();
             u.setLogin(login);
             u.setPassword(password);
-           
+            u.setEmail(user.getEmail());
+            UserGroup group = new UserGroup();
+            group.setId(2L);
+            u.setUserGroup(group);
             userDAO.create(u);
             return "index";
         }
@@ -130,8 +134,6 @@ public class UserManagedBean implements Serializable {
     }
 
     public boolean checkPassword() {
-        System.out.print(user.getPassword());
-         System.out.print(password2);
         if (!password.equals(password2)) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(passwordInput.getClientId(), new FacesMessage(FacesMessage.SEVERITY_ERROR, "Passwords don't match.", null));
