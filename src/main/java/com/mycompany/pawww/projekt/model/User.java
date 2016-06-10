@@ -41,7 +41,7 @@ public class User implements Serializable {
     private Collection<Review> reviews;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     private Collection<UserRating> ratings;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinTable
     private UserGroup userGroup;
     public Long getId() {

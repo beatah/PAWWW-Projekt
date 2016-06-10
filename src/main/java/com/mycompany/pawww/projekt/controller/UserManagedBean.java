@@ -6,18 +6,22 @@
 package com.mycompany.pawww.projekt.controller;
 
 import com.mycompany.pawww.projekt.bean.UserDAO;
+import com.mycompany.pawww.projekt.mail.SendMailEjb;
 import com.mycompany.pawww.projekt.model.User;
 import com.mycompany.pawww.projekt.model.UserGroup;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import org.slf4j.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import org.slf4j.LoggerFactory;
+
 /**
  *
  * @author Adam Wasilczuk
@@ -27,8 +31,12 @@ import javax.faces.context.FacesContext;
 public class UserManagedBean implements Serializable {
 
     @EJB
+    private SendMailEjb sendMailEjb;
+
+    @EJB
     UserDAO userDAO;
-    
+
+//    private final Logger log = LoggerFactory.getLogger(UserManagedBean.class);
     private User user;
     private UIComponent loginInput;
     private UIComponent passwordInput;
@@ -52,7 +60,6 @@ public class UserManagedBean implements Serializable {
         this.password = password;
     }
 
-    
     public UIComponent getPasswordInput() {
         return passwordInput;
     }
@@ -76,6 +83,7 @@ public class UserManagedBean implements Serializable {
     public void setLoginInput(UIComponent loginInput) {
         this.loginInput = loginInput;
     }
+
     @PostConstruct
     public void init() {
         user = new User();
@@ -89,10 +97,9 @@ public class UserManagedBean implements Serializable {
         this.user = user;
     }
 
-    
     public String add() {
-        if (checkDuplicate()&&checkPassword()) {
-            User u=new User();
+        if (checkDuplicate() && checkPassword()) {
+            User u = new User();
             u.setLogin(login);
             u.setPassword(password);
             u.setEmail(user.getEmail());
@@ -100,23 +107,32 @@ public class UserManagedBean implements Serializable {
             group.setId(2L);
             u.setUserGroup(group);
             userDAO.create(u);
+//            log.log(Level.FINE, "Successful register new account");
             return "index";
         }
+//        log.log(Level.FINE, "Error during registration process");
         return "registration";
     }
-    
+
     public String login() {
         user = userDAO.vaidateUsernamaPassword(user.getLogin(), user.getPassword());
-        if(user.getLogin() == null) {
+        if (user.getLogin() == null) {
             FacesContext.getCurrentInstance().addMessage(
                     "loginForm:login", new FacesMessage("Wrong login or password"));
+//            log.log(Level.FINE, "Error during login process");
+            
             return "login";
         }
+        sendMailEjb.sendMail(user.getEmail(), "Login notification",
+                    "There was successful login to your account at " +
+                            new Date());
+//        log.info("Successfully logged in");
         return "index";
     }
-    
+
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+//        log.log(Level.FINE, "Successful logged out");
         return "index?faces-redirect=true";
     }
 
@@ -125,9 +141,11 @@ public class UserManagedBean implements Serializable {
         for (User u : users) {
             if (login.equals(u.getLogin())) {
                 FacesContext context = FacesContext.getCurrentInstance();
-                context.addMessage(loginInput.getClientId(), new FacesMessage(FacesMessage.SEVERITY_ERROR, "The username already exists.", null));
+                context.addMessage(loginInput.getClientId(),
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                "The username already exists.", null));
+//                log.log(Level.FINE, "Found duplicate username");
                 return false;
-
             }
         }
         return true;
