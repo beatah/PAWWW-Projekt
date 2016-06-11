@@ -10,65 +10,58 @@
         <title><ui:insert name="title">Strona</ui:insert></title>
         <h:outputStylesheet library="webjars" name="bootstrap/3.3.6/css/bootstrap-jsf.css" />
         <h:outputStylesheet library="css" name="style.css" />
-        <h:outputStylesheet library="js" name="accordion.js" />
+        <h:outputStylesheet library="css" name="registerModal.css" />
+        <h:outputScript library="js" name="accordion.js" />
         <h:outputScript library="webjars" name="bootstrap/3.3.6/js/bootstrap.js" />
+        <h:outputScript library="js" name="jquery.leanModal.min.js" />
+        <h:outputScript library="js" name="registerModal.js" />
+        <h:outputScript library="js" name="imgcaption.js" />
+        <h:outputScript library="js" name="registrationTerms.js" />
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-        <script>
-jQuery(document).ready(function() {
-    function close_accordion_section() {
-        jQuery('.accordion .accordion-title').removeClass('active');
-        jQuery('.accordion .accordion-content').slideUp(300).removeClass('open');
-    }
- 
-    jQuery('.accordion-title').click(function(e) {
-        var currentAttrValue = $(this).attr('href');
- 
-        if(jQuery(e.target).is('.active')) {
-            close_accordion_section();
-        }
-        else 
-        {
-            close_accordion_section();
-            jQuery(this).addClass('active');
-            jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open'); 
-        }
- 
-        e.preventDefault();
-    });
-});
-
-
-
-jQuery(document).ready(function() {
-	jQuery('.imghover').hover(
-		function(){
-			jQuery(this).find('.caption').show();
-		},
-		function(){
-			jQuery(this).find('.caption').hide();
-		}
-	);
-});
-
-jQuery(document).ready(function(){
-    jQuery(".reg").click(function(){
-        jQuery.ajax({url: "terms.html", success: function(result){
-            jQuery("#div1").html(result);
-        }});
-    });
-});
-            </script>
     </h:head>
     <h:body>
         <ui:insert name="header">
             <ui:include src="header.xhtml" />
         </ui:insert>
         <div class="container" role="main">
-        
+
             <div class="jumbotron" style="background: none" />
-        
+
             <ui:insert name="content">
                 <ui:include src="main.xhtml" />
+                <dir class="container">
+                    <a id="modal_trigger" href="#modal" class="btn btn-default">Sign up!</a>
+                    <div id="modal" class="popupContainer" style="display:none;">
+                        <header class="popupHeader">
+                            <span class="header_title">Register</span>
+                            <span class="modal_close"><i class="glyphicon glyphicon-remove"></i></span>
+                        </header>
+
+                        <section class="popupBody">
+                            <div class="user_register">
+                                <form>
+                                    <label>Full Name</label>
+                                    <input type="text" />
+                                    <br />
+
+                                    <label>Email Address</label>
+                                    <input type="email" />
+                                    <br />
+
+                                    <label>Password</label>
+                                    <input type="password" />
+                                    <br />
+                                    <div id="div1"></div>
+                                    <a class="reg">By registering you agree to the terms and conditions.</a><br/>
+
+                                    <div class="action_btns">
+                                        <div><a href="#" class="btn btn-primary">Register</a></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </dir>
             </ui:insert>
         </div>
         <ui:insert name="footer">
