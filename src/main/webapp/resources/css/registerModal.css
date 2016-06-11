@@ -34,10 +34,12 @@ body {font-family: 'Source Sans Pro', sans-serif; font-size: 14px; color: #666;}
 .centeredText {text-align: center; margin: 20px 0; clear: both; overflow: hidden; text-transform: uppercase;}
 
 .action_btns {clear:both; overflow: hidden;}
-.action_btns a {display: block;}
+.action_btns input {display: block; width:100%;}
 
 .user_register label {display: block; margin-bottom:5px;}
-.user_register input[type="text"], .user_register input[type="email"], .user_register input[type="password"] {display: block; width:90%; padding: 10px; border:1px solid #DDD; color:#666;}
+.user_register input[type="text"], 
+.user_register input[type="email"], 
+.user_register input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
 .user_register input[type="checkbox"] {float:left; margin-right:5px;}
 .user_register input[type="checkbox"]+label {float:left;}
 
