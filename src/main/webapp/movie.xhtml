@@ -54,23 +54,23 @@
                 </ui:repeat>
             </h:column>
         </h:dataTable>
-        <h:dataTable id="review" var="review" value="#{movieReview.movie.reviews}" class="table table-striped">
-            <h:column>
-                <f:facet name="header">Reviews</f:facet>
-                <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputText value="Author: " />
-                    <h:outputText value="#{review.user.login}" style="font-weight: bold"/>
-                    <h:outputText value="Date:" style="font-size: 10px;" />
+        <h:outputText value="Recenzje" style="font-weight: bold; font-size: 18px;"/>
+        <div class="accordion">
+            <ui:repeat id="review" var="review" value="#{movieReview.movie.reviews}">
+                <div class="accordion-section">
+                    <a class="accordion-title" href="#review-#{review.id}"> Author: #{review.user.login}</a>
+                    <div id="review-#{review.id}" class="accordion-content">
+                                        <h:outputText value="Date:" style="font-size: 10px;" />
                     <h:outputText value="#{review.reviewDate}" style="font-weight: bold; font-size: 10px;">
                     <f:converter converterId="DateConverter" />
-                    </h:outputText>
-                </h:panelGrid>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{review.reviewMessage}" style="font-weight: bold"/>
-            </h:column>
-        </h:dataTable>
-
+                    </h:outputText><br/>
+                    <h:outputText value="#{review.reviewMessage}" style="font-weight: bold" />
+                    </div>
+                </div>
+            </ui:repeat>
+        </div>
+        
+      
         <f:view >
             <h:form rendered="#{not empty userManagedBean.user.id}">
                 <div class="container">
