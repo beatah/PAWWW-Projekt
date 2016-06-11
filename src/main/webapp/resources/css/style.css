@@ -89,3 +89,31 @@ h2 {
     background-color: #101010;
 }
 
+ 
+.accordion {
+    overflow:hidden;
+    border-radius:3px;
+    background:#f7f7f7;
+}
+ 
+.accordion-title {
+    width:100%;
+    padding:15px;
+    display:inline-block;
+    border-bottom:1px solid #1a1a1a;
+    background:#333;
+    transition:all linear 0.15s;
+    font-size:1.200em;
+    color:#fff;
+}
+ 
+.accordion-title.active, .accordion-title:hover {
+    background:#4c4c4c;
+    color:#fff;
+    text-decoration:none;
+}
+ 
+.accordion-content {
+    padding:15px;
+    display:none;
+}
