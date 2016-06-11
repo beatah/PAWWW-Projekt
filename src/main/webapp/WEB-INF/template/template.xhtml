@@ -36,6 +36,19 @@ jQuery(document).ready(function() {
         e.preventDefault();
     });
 });
+
+
+
+jQuery(document).ready(function() {
+	jQuery('.imghover').hover(
+		function(){
+			jQuery(this).find('.caption').show();
+		},
+		function(){
+			jQuery(this).find('.caption').hide();
+		}
+	);
+});
             </script>
     </h:head>
     <h:body>
