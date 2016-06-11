@@ -41,9 +41,12 @@
 
                         <section class="popupBody">
                             <div class="user_register">
-                                <form id="registerForm">
+                                <form id="registerForm" 
+                                      action="#{userManagedBean.addJQuery()}" 
+                                      method="post">
                                     <label>Full Name</label>
-                                    <input type="text" name="login"/>
+                                    <input type="text" name="login" 
+                                           value="#{userManagedBean.user.login}"/>
                                     <br />
 
                                     <label>Email Address</label>
@@ -51,7 +54,8 @@
                                     <br />
 
                                     <label>Password</label>
-                                    <input type="password" name="password"/>
+                                    <input type="password" name="password"
+                                           value="#{userManagedBean.user.password}"/>
                                     <br />
                                     <div id="div1"></div>
                                     <a class="reg">By registering you agree to the terms and conditions.</a><br/>

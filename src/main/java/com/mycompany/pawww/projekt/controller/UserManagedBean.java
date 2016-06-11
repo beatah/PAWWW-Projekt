@@ -20,6 +20,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -41,6 +42,7 @@ public class UserManagedBean implements Serializable {
     private UIComponent loginInput;
     private UIComponent passwordInput;
     private String login;
+    private String email;
     private String password;
     private String password2;
 
@@ -58,6 +60,14 @@ public class UserManagedBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public UIComponent getPasswordInput() {
@@ -114,18 +124,35 @@ public class UserManagedBean implements Serializable {
         return "registration";
     }
 
+    public String addJQuery() {
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        User u = new User();
+        u.setLogin(req.getParameter("login"));
+        u.setPassword(req.getParameter("password"));
+        u.setEmail(req.getParameter("email"));
+        UserGroup group = new UserGroup();
+        group.setId(2L);
+        u.setUserGroup(group);
+        userDAO.create(u);
+//            log.log(Level.FINE, "Successful register new account");
+        return "index.xhtml";
+
+//        log.log(Level.FINE, "Error during registration process");
+//        return "registration";
+    }
+
     public String login() {
         user = userDAO.vaidateUsernamaPassword(user.getLogin(), user.getPassword());
         if (user.getLogin() == null) {
             FacesContext.getCurrentInstance().addMessage(
                     "loginForm:login", new FacesMessage("Wrong login or password"));
 //            log.log(Level.FINE, "Error during login process");
-            
+
             return "login";
         }
         sendMailEjb.sendMail(user.getEmail(), "Login notification",
-                    "There was successful login to your account at " +
-                            new Date());
+                "There was successful login to your account at "
+                + new Date());
 //        log.info("Successfully logged in");
         return "index";
     }
