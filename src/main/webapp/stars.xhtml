@@ -9,18 +9,21 @@
         Stars
     </ui:define>
     <ui:define name="content">
-            <h:dataTable var="cast" value="#{castManagedBean.stars}" class="table table-striped">
-                <h:column>
-                    <f:facet name="header">Name</f:facet>
-                    <h:outputText value="#{cast.name}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Movies</f:facet>
-                    <h:form>
-                        <p:commandLink action="#{castManagedBean.showStar(cast)}" value="Show list of movies" />
-                        
-                    </h:form>
-                </h:column>
-            </h:dataTable>
+        <label>Search star</label>
+        <input id="search" type="text" placeholder="Search star" />
+        <p></p>
+        <h:dataTable var="cast" value="#{castManagedBean.stars}" class="table table-striped">
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{cast.name}" class="name"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Movies</f:facet>
+                <h:form>
+                    <p:commandLink action="#{castManagedBean.showStar(cast)}" value="Show list of movies" />
+
+                </h:form>
+            </h:column>
+        </h:dataTable>
     </ui:define>
 </ui:composition>
