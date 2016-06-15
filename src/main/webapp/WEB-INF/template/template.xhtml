@@ -33,47 +33,6 @@
 
             <ui:insert name="content">
                 <ui:include src="main.xhtml" />
-                <dir class="container">
-                    <a id="modal_trigger" href="#modal" class="btn btn-default">Sign up!</a>
-                    <div id="modal" class="popupContainer" style="display:none;">
-                        <header class="popupHeader">
-                            <span class="header_title">Register</span>
-                            <span class="modal_close"><i class="glyphicon glyphicon-remove"></i></span>
-                        </header>
-
-                        <section class="popupBody">
-                            <div class="user_register">
-                                <form id="registerForm" 
-                                      action="#{userManagedBean.addJQuery()}" 
-                                      method="post">
-                                    <label>Login</label>
-                                    <input type="text" name="login" 
-                                           data-toggle="tooltip"
-                                           title="Login used to futere log in"/>
-                                    <br />
-
-                                    <label>Email Address</label>
-                                    <input type="email" name="email"
-                                           data-toggle="tooltip"
-                                           />
-                                    <br />
-
-                                    <label>Password</label>
-                                    <input type="password" name="password"
-                                           data-toggle="tooltip"
-                                           title="Password must contain minimum 6 characters"/>
-                                    <br />
-                                    <div id="div1"></div>
-                                    <a class="reg">By registering you agree to the terms and conditions.</a><br/>
-
-                                    <div class="action_btns">
-                                        <div><input type="submit" value="Register" class="btn btn-primary"/></div>
-                                    </div>
-                                </form>
-                            </div>
-                        </section>
-                    </div>
-                </dir>
             </ui:insert>
         </div>
         <ui:insert name="footer">
